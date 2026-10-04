@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Musculanity</title>
+  <meta name="description" content="A field course in becoming a man. Twelve talks by Logical Malik, each with a drill." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Outfit:wght@400;500;600&display=swap" />
+  <style>
+    :root { color-scheme: dark; --bg:#100e0c; --fg:#f4efe6; --muted:#b7ab9c; --ember:#d4652f; --line:#2e2924; --surface:#1a1714; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: Outfit, system-ui, sans-serif; line-height: 1.5; }
+    button, a { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    header { position: sticky; top: 0; z-index: 2; background: rgba(16,14,12,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(10px); }
+    .bar { height: 4px; background: var(--line); }
+    .bar i { display: block; height: 100%; background: var(--ember); width: 0; transition: width .4s ease; }
+    .wrap { max-width: 72rem; margin: 0 auto; padding: 0.8rem 1rem; display: flex; align-items: center; gap: 1rem; }
+    .kicker { margin: 0; letter-spacing: .22em; text-transform: uppercase; font-size: .72rem; color: var(--ember); }
+    h1 { margin: 0; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 2rem; line-height: 1; }
+    .count { margin-left: auto; color: var(--muted); font-size: .9rem; }
+    .channel { border: 1px solid var(--line); border-radius: 999px; padding: .5rem .8rem; text-decoration: none; }
+    main { max-width: 72rem; margin: 0 auto; padding: 1.2rem 1rem 3rem; display: grid; gap: 1.2rem; }
+    nav { display: flex; gap: .5rem; overflow-x: auto; }
+    nav button, .actions button { border-radius: 999px; border: 1px solid var(--line); background: transparent; min-height: 44px; }
+    nav button { display: flex; align-items: center; gap: .6rem; min-width: 12rem; text-align: left; padding: .45rem .7rem; border-radius: .8rem; }
+    nav button.on { border-color: var(--ember); background: var(--surface); }
+    nav b { display: block; font-weight: 500; }
+    nav small, .note { color: var(--muted); }
+    .n { width: 1.7rem; height: 1.7rem; border: 1px solid var(--line); border-radius: 999px; display: grid; place-items: center; font-size: .75rem; flex: none; }
+    .n.done { border-color: var(--ember); color: var(--ember); }
+    article { animation: rise .4s ease; }
+    h2 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 3rem; line-height: .95; margin: .3rem 0 0; }
+    .lead { color: var(--muted); font-size: 1.15rem; max-width: 38rem; }
+    ul { padding: 0; list-style: none; }
+    li { display: flex; gap: .7rem; margin: .7rem 0; animation: rise .4s ease both; }
+    li i { width: .4rem; height: .4rem; margin-top: .55rem; border-radius: 999px; background: var(--ember); flex: none; }
+    .do { border: 1px solid var(--line); background: var(--surface); border-radius: .8rem; padding: .8rem 1rem; }
+    .do span { color: var(--ember); }
+    .frame { margin-top: 1rem; border: 1px solid var(--line); border-radius: .8rem; overflow: hidden; background: #000; aspect-ratio: 16/9; }
+    iframe { width: 100%; height: 100%; border: 0; }
+    .actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .actions button { padding: 0 1rem; }
+    .primary { background: var(--ember); color: var(--bg); border-color: var(--ember); font-weight: 600; }
+    .mark { position: relative; width: 8.5rem; height: 8.5rem; margin-bottom: .4rem; }
+    .mark span { position: absolute; background: var(--fg); border-radius: 999px; display: block; }
+    .head { width: 1.2rem; height: 1.2rem; background: var(--ember); left: 3.4rem; top: .3rem; }
+    .spine { width: .24rem; height: 3rem; left: 3.9rem; top: 1.6rem; transform-origin: top; }
+    .arm, .leg { width: .24rem; transform-origin: top; }
+    .arm { height: 2.1rem; top: 1.9rem; }
+    .arm.l { left: 2.9rem; transform: rotate(26deg); }
+    .arm.r { left: 4.8rem; transform: rotate(-26deg); }
+    .leg { height: 2.4rem; top: 4.5rem; }
+    .leg.l { left: 3.3rem; transform: rotate(12deg); }
+    .leg.r { left: 4.5rem; transform: rotate(-12deg); }
+    .ring { inset: 0; border: 2px solid var(--ember); border-radius: 999px; background: transparent; opacity: .4; }
+    .motion-iron .arm.l { animation: press 1.4s ease-in-out infinite; }
+    .motion-iron .arm.r { animation: press 1.4s ease-in-out infinite reverse; }
+    .motion-walk .leg.l { animation: step 1s ease-in-out infinite; }
+    .motion-walk .leg.r { animation: step 1s ease-in-out infinite reverse; }
+    .motion-spine .spine, .motion-path .spine { animation: straighten 1.6s ease-in-out infinite; }
+    .motion-voice .ring, .motion-eye .ring, .motion-coin .ring { animation: pulse 1.6s ease-out infinite; }
+    .motion-heart .head { animation: beat 1.1s ease-in-out infinite; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes press { 50% { transform: rotate(0deg) translateY(-.35rem); } }
+    @keyframes step { 50% { transform: rotate(-16deg); } }
+    @keyframes straighten { 0%,100% { transform: rotate(8deg) scaleY(.8); } 50% { transform: none; } }
+    @keyframes pulse { 70% { transform: scale(1.08); opacity: 0; } }
+    @keyframes beat { 40% { transform: scale(1.12); } }
+    @media (min-width: 900px) {
+      main { grid-template-columns: 16rem 1fr; align-items: start; }
+      nav { flex-direction: column; overflow: visible; position: sticky; top: 5.5rem; }
+      nav button { min-width: 0; }
+    }
+    @media (max-width: 640px) { .count { display: none; } h2 { font-size: 2.4rem; } }
+    @media (prefers-reduced-motion: reduce) { article, li, .mark span { animation: none !important; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div>
+        <p class="kicker">Field course</p>
+        <h1>Musculanity</h1>
+      </div>
+      <p class="count" id="count"></p>
+      <a class="channel" href="https://www.youtube.com/@LogicalMalik" target="_blank" rel="noreferrer">His channel</a>
+    </div>
+    <div class="bar"><i id="meter"></i></div>
+  </header>
+  <main>
+    <nav id="nav" aria-label="Lessons"></nav>
+    <article id="stage"></article>
+  </main>
+  <script>
+    const lessons = [{"id":"rules","title":"One standard, kept","talk":"Be a Real Masculine MAN (5 Important Rules)","youtubeId":"ElrpHHzBEWU","minutes":"33 min","lead":"A man is the standard he still keeps when the room is empty.","points":["What you repeat is your character. What you announce is just noise.","Strength, work, and self-command come before opinions.","Do not hand your spine to a parent, a boss, or a crowd.","Pick the hard useful thing and finish it the same day.","A rule you will not keep is not a rule. Write fewer, and mean them."],"practice":"Write five rules you will keep this week. One line each. Put them where you dress.","motion":"spine"},{"id":"direct","title":"Direct, not rude","talk":"Boy to Man transformation","youtubeId":"__n457Mc58s","minutes":"29 min","lead":"The talk is blunt about politeness. The useful point is smaller: stop performing to be liked.","points":["People-pleasing is fear, not kindness.","Say the true thing in a calm voice. Courtesy stays.","A boy smiles through a no. A man gives the no and stops talking.","Insulting people to look strong is still a performance.","Disagree once, clearly. Then let the silence stand."],"practice":"Decline one thing you do not want. No essay. No apology paragraph.","motion":"voice"},{"id":"iron","title":"Build a strong body","talk":"How to be a STRONG MAN?","youtubeId":"j4CIALiNJTU","minutes":"27 min","lead":"A weak body is mostly unused muscle and unused hours, not fate.","points":["Train four days. Walk on the others. Sleep like it is part of the work.","Eat enough protein. A plate of only rice will not build you.","No gym is not an excuse. Push-ups, squats, and a walk still count.","Strength makes you harder to push, in a room and in a crisis.","Log the numbers. A man measures. A boy hopes."],"practice":"Three sets of push-ups and squats before you close this lesson. Write the counts down.","motion":"iron"},{"id":"adult","title":"Stop living as a guest","talk":"Why indian boys NEVER behave like a REAL MAN?","youtubeId":"6Md2Us92vQA","minutes":"24 min","lead":"Adulthood starts when your life is no longer something other people run for you.","points":["Pay your own way as soon as you can. Money you earn changes how you stand.","Respect your parents. Do not let their fear choose your work or your city.","Blame is a boy's hobby. A plan is a man's.","If people depend on you, you do not vanish. You get stronger, then you lead.","A skill, a job, and a room you pay for are worth more than a speech about freedom."],"practice":"Name one bill, skill, or decision you will take over this month.","motion":"walk"},{"id":"dating","title":"Dating with a spine","talk":"Behave like a strong man — dating tips","youtubeId":"lTBB5c38Kx0","minutes":"23 min","lead":"Self-respect in dating is not control of another person. It is refusing to beg.","points":["Do not chase someone who will not answer.","Two unanswered tries is a no. Stop, and go train.","Be clear about what you want. Do not play a character.","Respect runs both ways. Dominating someone is not masculinity.","A full life is attractive. Needing her to feel like a man is not."],"practice":"If you are waiting on a message, close the app and do the workout instead.","motion":"eye"},{"id":"still","title":"Don't play the joker","talk":"Be a strong and alpha man, and don't act like a joker","youtubeId":"T9H1xGq-_a8","minutes":"27 min","lead":"Laughing is fine. Clowning so the room will not reject you is a habit to drop.","points":["Sit still. Let a silence stay.","Your joke is not your personality.","Speak slower than you want to.","The room does not need a show. It needs a man who is already occupied.","If you are funny, be funny on purpose. Not as armor."],"practice":"In the next conversation, leave one silence. Do not fill it.","motion":"path"},{"id":"health","title":"Health is the first duty","talk":"Why Indian men are not healthy?","youtubeId":"DpiUIL9X2wI","minutes":"21 min","lead":"A tired, unused body makes a soft mind. Fix the week before you fix the world.","points":["Desk work takes the day. You put the training back on purpose.","Sun, steps, sleep, water. Boring, and not optional.","Stop joking about being unfit. Change the schedule.","Food is fuel for the work, not a reward for surviving the day.","A strong man can still be tired. He does not live tired on purpose."],"practice":"Set a bedtime and a thirty-minute walk for tomorrow morning.","motion":"heart"},{"id":"father","title":"Stronger, without contempt","talk":"Why Indian fathers fear real masculinity","youtubeId":"_77saZIGX5c","minutes":"23 min","lead":"Some fathers only know control, because that is what they were given. You can be stronger without mocking them.","points":["His fear is not your ceiling.","Do not humiliate the man who raised you in order to feel free.","Strength without contempt is the actual upgrade.","Do not pass his fear on, to a son or to yourself.","Become capable first. Arguments before that are just noise."],"practice":"Write one honest sentence about what you will do differently. Send it only if it helps.","motion":"spine"},{"id":"late","title":"The prime is not only at 22","talk":"Peak masculinity starts after 40","youtubeId":"uBP0AVhi6wU","minutes":"24 min","lead":"Panic is a boy's clock. Muscle, money, and nerve can all be built late.","points":["Do not wait for a feeling. Start the decade's work this week.","The men who look finished at thirty usually stopped training.","A late start is still a start. An excuse is not.","Use the years you have. They are the only ones.","Consistency after forty beats a wild year at twenty."],"practice":"Name a skill you will still be doing at forty-five. Put the first hour on the calendar.","motion":"path"},{"id":"name","title":"A strong manner is trained","talk":"Weak personality to strong personality","youtubeId":"KscvzJ5OGIM","minutes":"28 min","lead":"Posture, eye contact, and a steady voice are drills. They are not gifts.","points":["Stand on both feet. Shoulders down. Don't fold into the chair.","Dress clean. Looking kept is respect, not a costume of wealth.","Keep small promises until your name means something.","Greet people while looking at them.","Personality is the trail of what you do when it is inconvenient."],"practice":"Today, look people in the eye when you greet them. Shoulders down.","motion":"eye"},{"id":"wealth","title":"A wage is not a fortune","talk":"Your work will never make you rich and wealthy","youtubeId":"TaIilzvH-t4","minutes":"35 min","lead":"A job keeps the lights on. Wealth is what you own, the skill you can sell, and what you do not waste.","points":["Do not quit a job you need just to feel bold.","Learn a skill people pay for, then own a piece of the result.","Looking put-together is not the same as pretending you are rich.","Spend less than you earn. Buy assets, not applause.","Leverage is skill plus ownership. It is not a slogan."],"practice":"Write what you earned, what you kept, and one skill you could sell.","motion":"coin"},{"id":"master","title":"Don't make everyone your master","talk":"Why do Indians make everyone their master?","youtubeId":"B3EgFodapc0","minutes":"16 min","lead":"Taking orders at work is not the same as handing someone your life.","points":["Parents, bosses, and teachers can advise. You decide.","A man who needs permission for every step is still a boy.","Freedom is competence plus the nerve to use it.","Do not trade your judgment for belonging.","Ask for help with a problem. Do not ask someone else to live it for you."],"practice":"Make one decision today without polling the group chat.","motion":"walk"}];
+    const key = "musculanity-done";
+    let done = [];
+    try { done = JSON.parse(localStorage.getItem(key) || "[]"); if (!Array.isArray(done)) done = []; } catch (e) { done = []; }
+    let active = 0;
+    const nav = document.getElementById("nav");
+    const stage = document.getElementById("stage");
+    function save() { localStorage.setItem(key, JSON.stringify(done)); }
+    function renderNav() {
+      nav.innerHTML = lessons.map((lesson, i) => `<button type="button" class="${i===active?"on":""}" data-i="${i}"><span class="n ${done.includes(lesson.id)?"done":""}">${done.includes(lesson.id)?"✓":i+1}</span><span><b>${lesson.title}</b><small>${lesson.minutes}</small></span></button>`).join("");
+    }
+    function render() {
+      const lesson = lessons[active];
+      document.getElementById("count").textContent = done.filter(id => lessons.some(l => l.id===id)).length + " of " + lessons.length + " practiced";
+      document.getElementById("meter").style.width = (done.filter(id => lessons.some(l => l.id===id)).length / lessons.length * 100) + "%";
+      renderNav();
+      stage.innerHTML = `
+        <div class="mark motion-${lesson.motion}" aria-hidden="true"><span class="ring"></span><span class="head"></span><span class="spine"></span><span class="arm l"></span><span class="arm r"></span><span class="leg l"></span><span class="leg r"></span></div>
+        <p class="kicker">Talk ${active+1} · ${lesson.minutes}</p>
+        <h2>${lesson.title}</h2>
+        <p class="lead">${lesson.lead}</p>
+        <ul>${lesson.points.map((p,i)=>`<li style="animation-delay:${i*70}ms"><i></i><span>${p}</span></li>`).join("")}</ul>
+        <p class="do"><span>Do this. </span>${lesson.practice}</p>
+        <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/${lesson.youtubeId}" title="${lesson.talk.replace(/"/g,"")}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <p class="note">${lesson.talk}. Video by Logical Malik. This page is a study guide, not his official site.</p>
+        <div class="actions">
+          <button class="primary" id="mark" type="button">${done.includes(lesson.id)?"Practiced":"Mark practiced"}</button>
+          ${active<lessons.length-1?'<button id="next" type="button">Next point</button>':""}
+        </div>`;
+      document.getElementById("mark").onclick = () => {
+        done = done.includes(lesson.id) ? done.filter(id => id!==lesson.id) : done.concat(lesson.id);
+        save(); render();
+      };
+      const next = document.getElementById("next");
+      if (next) next.onclick = () => { active += 1; render(); };
+    }
+    nav.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      active = Number(button.dataset.i);
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>
