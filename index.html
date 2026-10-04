@@ -1,142 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Musculanity</title>
-  <meta name="description" content="A field course in becoming a man. Twelve talks by Logical Malik, each with a drill." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Outfit:wght@400;500;600&display=swap" />
-  <style>
-    :root { color-scheme: dark; --bg:#100e0c; --fg:#f4efe6; --muted:#b7ab9c; --ember:#d4652f; --line:#2e2924; --surface:#1a1714; }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: Outfit, system-ui, sans-serif; line-height: 1.5; }
-    button, a { font: inherit; color: inherit; }
-    button { cursor: pointer; }
-    header { position: sticky; top: 0; z-index: 2; background: rgba(16,14,12,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(10px); }
-    .bar { height: 4px; background: var(--line); }
-    .bar i { display: block; height: 100%; background: var(--ember); width: 0; transition: width .4s ease; }
-    .wrap { max-width: 72rem; margin: 0 auto; padding: 0.8rem 1rem; display: flex; align-items: center; gap: 1rem; }
-    .kicker { margin: 0; letter-spacing: .22em; text-transform: uppercase; font-size: .72rem; color: var(--ember); }
-    h1 { margin: 0; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 2rem; line-height: 1; }
-    .count { margin-left: auto; color: var(--muted); font-size: .9rem; }
-    .channel { border: 1px solid var(--line); border-radius: 999px; padding: .5rem .8rem; text-decoration: none; }
-    main { max-width: 72rem; margin: 0 auto; padding: 1.2rem 1rem 3rem; display: grid; gap: 1.2rem; }
-    nav { display: flex; gap: .5rem; overflow-x: auto; }
-    nav button, .actions button { border-radius: 999px; border: 1px solid var(--line); background: transparent; min-height: 44px; }
-    nav button { display: flex; align-items: center; gap: .6rem; min-width: 12rem; text-align: left; padding: .45rem .7rem; border-radius: .8rem; }
-    nav button.on { border-color: var(--ember); background: var(--surface); }
-    nav b { display: block; font-weight: 500; }
-    nav small, .note { color: var(--muted); }
-    .n { width: 1.7rem; height: 1.7rem; border: 1px solid var(--line); border-radius: 999px; display: grid; place-items: center; font-size: .75rem; flex: none; }
-    .n.done { border-color: var(--ember); color: var(--ember); }
-    article { animation: rise .4s ease; }
-    h2 { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 3rem; line-height: .95; margin: .3rem 0 0; }
-    .lead { color: var(--muted); font-size: 1.15rem; max-width: 38rem; }
-    ul { padding: 0; list-style: none; }
-    li { display: flex; gap: .7rem; margin: .7rem 0; animation: rise .4s ease both; }
-    li i { width: .4rem; height: .4rem; margin-top: .55rem; border-radius: 999px; background: var(--ember); flex: none; }
-    .do { border: 1px solid var(--line); background: var(--surface); border-radius: .8rem; padding: .8rem 1rem; }
-    .do span { color: var(--ember); }
-    .frame { margin-top: 1rem; border: 1px solid var(--line); border-radius: .8rem; overflow: hidden; background: #000; aspect-ratio: 16/9; }
-    iframe { width: 100%; height: 100%; border: 0; }
-    .actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
-    .actions button { padding: 0 1rem; }
-    .primary { background: var(--ember); color: var(--bg); border-color: var(--ember); font-weight: 600; }
-    .mark { position: relative; width: 8.5rem; height: 8.5rem; margin-bottom: .4rem; }
-    .mark span { position: absolute; background: var(--fg); border-radius: 999px; display: block; }
-    .head { width: 1.2rem; height: 1.2rem; background: var(--ember); left: 3.4rem; top: .3rem; }
-    .spine { width: .24rem; height: 3rem; left: 3.9rem; top: 1.6rem; transform-origin: top; }
-    .arm, .leg { width: .24rem; transform-origin: top; }
-    .arm { height: 2.1rem; top: 1.9rem; }
-    .arm.l { left: 2.9rem; transform: rotate(26deg); }
-    .arm.r { left: 4.8rem; transform: rotate(-26deg); }
-    .leg { height: 2.4rem; top: 4.5rem; }
-    .leg.l { left: 3.3rem; transform: rotate(12deg); }
-    .leg.r { left: 4.5rem; transform: rotate(-12deg); }
-    .ring { inset: 0; border: 2px solid var(--ember); border-radius: 999px; background: transparent; opacity: .4; }
-    .motion-iron .arm.l { animation: press 1.4s ease-in-out infinite; }
-    .motion-iron .arm.r { animation: press 1.4s ease-in-out infinite reverse; }
-    .motion-walk .leg.l { animation: step 1s ease-in-out infinite; }
-    .motion-walk .leg.r { animation: step 1s ease-in-out infinite reverse; }
-    .motion-spine .spine, .motion-path .spine { animation: straighten 1.6s ease-in-out infinite; }
-    .motion-voice .ring, .motion-eye .ring, .motion-coin .ring { animation: pulse 1.6s ease-out infinite; }
-    .motion-heart .head { animation: beat 1.1s ease-in-out infinite; }
-    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-    @keyframes press { 50% { transform: rotate(0deg) translateY(-.35rem); } }
-    @keyframes step { 50% { transform: rotate(-16deg); } }
-    @keyframes straighten { 0%,100% { transform: rotate(8deg) scaleY(.8); } 50% { transform: none; } }
-    @keyframes pulse { 70% { transform: scale(1.08); opacity: 0; } }
-    @keyframes beat { 40% { transform: scale(1.12); } }
-    @media (min-width: 900px) {
-      main { grid-template-columns: 16rem 1fr; align-items: start; }
-      nav { flex-direction: column; overflow: visible; position: sticky; top: 5.5rem; }
-      nav button { min-width: 0; }
-    }
-    @media (max-width: 640px) { .count { display: none; } h2 { font-size: 2.4rem; } }
-    @media (prefers-reduced-motion: reduce) { article, li, .mark span { animation: none !important; } }
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Musculanity</title>
+<meta name="description" content="A six-phase transformation. Every Logical Malik talk in the build has a description, watch notes, and a drill."/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Outfit:wght@400;500;600&display=swap"/>
+<style>
+:root{color-scheme:dark;--bg:#0c0e11;--fg:#efe8dc;--muted:#a39b90;--ember:#e0703a;--line:#2c3138;--surface:#15181c}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Outfit,system-ui,sans-serif;line-height:1.5}
+body{background-image:linear-gradient(180deg,rgba(224,112,58,.14),transparent 16rem),repeating-linear-gradient(-45deg,rgba(239,232,220,.035) 0 1px,transparent 1px 11px)}
+button,a{font:inherit;color:inherit}button{cursor:pointer;background:transparent}
+header{position:sticky;top:0;z-index:2;background:rgba(12,14,17,.95);border-bottom:1px solid var(--line)}
+.wrap{max-width:72rem;margin:0 auto;padding:.8rem 1rem;display:flex;align-items:flex-end;gap:1rem}
+.kicker{margin:0;letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;color:var(--ember);font-weight:600}
+h1{margin:0;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:2.4rem;line-height:1}
+.count{margin-left:auto;color:var(--muted);font-size:.9rem}
+.channel{border:1px solid var(--line);padding:.5rem .8rem;text-decoration:none}
+.bar{height:4px;background:var(--line)}.bar i{display:block;height:100%;background:var(--ember);width:0}
+main{max-width:72rem;margin:0 auto;padding:1.2rem 1rem 3rem;display:grid;gap:1.4rem}
+nav{display:flex;gap:1rem;overflow:auto}
+.phase{min-width:15rem}
+.phase .kicker{color:var(--muted);margin-bottom:.4rem}
+nav button{display:flex;gap:.6rem;align-items:center;width:100%;text-align:left;border:1px solid var(--line);background:rgba(12,14,17,.6);min-height:44px;padding:.4rem .6rem;margin-bottom:.4rem}
+nav button.on{border-color:var(--ember);background:var(--surface)}
+nav b{display:block;font-weight:500}nav small{color:var(--muted)}
+.n{width:1.7rem;height:1.7rem;border:1px solid var(--line);display:grid;place-items:center;font-size:.75rem;flex:none}
+.n.done{border-color:var(--ember);color:var(--ember)}
+h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:3rem;line-height:.95;margin:.3rem 0}
+.aim{color:var(--muted);max-width:40rem}
+.sheet{display:grid;gap:1rem;border:1px solid var(--line);background:rgba(21,24,28,.85);padding:1rem}
+.talk{margin:.4rem 0 0}
+ol,ul{padding:0;margin:.6rem 0 0;list-style:none}
+ol li,ul li{display:flex;gap:.7rem;margin:.55rem 0}
+.num{color:var(--ember);width:1.6rem;flex:none;font-weight:600}
+ul li{border-left:2px solid var(--ember);padding-left:.7rem}
+.do{border:1px solid var(--line);padding:.8rem 1rem}
+.frame{margin-top:1rem;border:1px solid var(--line);background:#000;aspect-ratio:16/9}
+iframe{width:100%;height:100%;border:0}
+.note{color:var(--muted);font-size:.9rem}
+.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.actions button{min-height:44px;padding:0 1rem;border:1px solid var(--line)}
+.primary{background:var(--ember);color:var(--bg);border-color:var(--ember);font-weight:600}
+.mark{position:relative;width:8.5rem;height:8.5rem}
+.mark span{position:absolute;background:var(--fg);border-radius:999px;display:block}
+.head{width:1.2rem;height:1.2rem;background:var(--ember);left:3.4rem;top:.3rem}
+.spine{width:.24rem;height:3rem;left:3.9rem;top:1.6rem;transform-origin:top}
+.arm,.leg{width:.24rem;transform-origin:top}.arm{height:2.1rem;top:1.9rem}
+.arm.l{left:2.9rem;transform:rotate(26deg)}.arm.r{left:4.8rem;transform:rotate(-26deg)}
+.leg{height:2.4rem;top:4.5rem}.leg.l{left:3.3rem;transform:rotate(12deg)}.leg.r{left:4.5rem;transform:rotate(-12deg)}
+.ring{inset:0;border:2px solid var(--ember);border-radius:999px;background:transparent;opacity:.45}
+.motion-iron .arm.l{animation:press 1.4s ease-in-out infinite}.motion-iron .arm.r{animation:press 1.4s ease-in-out infinite reverse}
+.motion-walk .leg.l{animation:step 1s ease-in-out infinite}.motion-walk .leg.r{animation:step 1s ease-in-out infinite reverse}
+.motion-spine .spine,.motion-path .spine{animation:straighten 1.6s ease-in-out infinite}
+.motion-voice .ring,.motion-eye .ring,.motion-coin .ring{animation:pulse 1.6s ease-out infinite}
+.motion-heart .head{animation:beat 1.1s ease-in-out infinite}
+@keyframes press{50%{transform:rotate(0) translateY(-.35rem)}}
+@keyframes step{50%{transform:rotate(-16deg)}}
+@keyframes straighten{0%,100%{transform:rotate(8deg) scaleY(.8)}50%{transform:none}}
+@keyframes pulse{70%{transform:scale(1.08);opacity:0}}
+@keyframes beat{40%{transform:scale(1.12)}}
+@media(min-width:960px){main{grid-template-columns:17rem 1fr;align-items:start}nav{display:block;position:sticky;top:5.6rem;max-height:calc(100vh - 6.4rem);overflow:auto}.phase{min-width:0}.sheet{grid-template-columns:8.5rem 1fr}}
+@media(max-width:640px){.count{display:none}h2{font-size:2.3rem}}
+@media(prefers-reduced-motion:reduce){.mark span{animation:none!important}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <div>
-        <p class="kicker">Field course</p>
-        <h1>Musculanity</h1>
-      </div>
-      <p class="count" id="count"></p>
-      <a class="channel" href="https://www.youtube.com/@LogicalMalik" target="_blank" rel="noreferrer">His channel</a>
-    </div>
-    <div class="bar"><i id="meter"></i></div>
-  </header>
-  <main>
-    <nav id="nav" aria-label="Lessons"></nav>
-    <article id="stage"></article>
-  </main>
-  <script>
-    const lessons = [{"id":"rules","title":"One standard, kept","talk":"Be a Real Masculine MAN (5 Important Rules)","youtubeId":"ElrpHHzBEWU","minutes":"33 min","lead":"A man is the standard he still keeps when the room is empty.","points":["What you repeat is your character. What you announce is just noise.","Strength, work, and self-command come before opinions.","Do not hand your spine to a parent, a boss, or a crowd.","Pick the hard useful thing and finish it the same day.","A rule you will not keep is not a rule. Write fewer, and mean them."],"practice":"Write five rules you will keep this week. One line each. Put them where you dress.","motion":"spine"},{"id":"direct","title":"Direct, not rude","talk":"Boy to Man transformation","youtubeId":"__n457Mc58s","minutes":"29 min","lead":"The talk is blunt about politeness. The useful point is smaller: stop performing to be liked.","points":["People-pleasing is fear, not kindness.","Say the true thing in a calm voice. Courtesy stays.","A boy smiles through a no. A man gives the no and stops talking.","Insulting people to look strong is still a performance.","Disagree once, clearly. Then let the silence stand."],"practice":"Decline one thing you do not want. No essay. No apology paragraph.","motion":"voice"},{"id":"iron","title":"Build a strong body","talk":"How to be a STRONG MAN?","youtubeId":"j4CIALiNJTU","minutes":"27 min","lead":"A weak body is mostly unused muscle and unused hours, not fate.","points":["Train four days. Walk on the others. Sleep like it is part of the work.","Eat enough protein. A plate of only rice will not build you.","No gym is not an excuse. Push-ups, squats, and a walk still count.","Strength makes you harder to push, in a room and in a crisis.","Log the numbers. A man measures. A boy hopes."],"practice":"Three sets of push-ups and squats before you close this lesson. Write the counts down.","motion":"iron"},{"id":"adult","title":"Stop living as a guest","talk":"Why indian boys NEVER behave like a REAL MAN?","youtubeId":"6Md2Us92vQA","minutes":"24 min","lead":"Adulthood starts when your life is no longer something other people run for you.","points":["Pay your own way as soon as you can. Money you earn changes how you stand.","Respect your parents. Do not let their fear choose your work or your city.","Blame is a boy's hobby. A plan is a man's.","If people depend on you, you do not vanish. You get stronger, then you lead.","A skill, a job, and a room you pay for are worth more than a speech about freedom."],"practice":"Name one bill, skill, or decision you will take over this month.","motion":"walk"},{"id":"dating","title":"Dating with a spine","talk":"Behave like a strong man — dating tips","youtubeId":"lTBB5c38Kx0","minutes":"23 min","lead":"Self-respect in dating is not control of another person. It is refusing to beg.","points":["Do not chase someone who will not answer.","Two unanswered tries is a no. Stop, and go train.","Be clear about what you want. Do not play a character.","Respect runs both ways. Dominating someone is not masculinity.","A full life is attractive. Needing her to feel like a man is not."],"practice":"If you are waiting on a message, close the app and do the workout instead.","motion":"eye"},{"id":"still","title":"Don't play the joker","talk":"Be a strong and alpha man, and don't act like a joker","youtubeId":"T9H1xGq-_a8","minutes":"27 min","lead":"Laughing is fine. Clowning so the room will not reject you is a habit to drop.","points":["Sit still. Let a silence stay.","Your joke is not your personality.","Speak slower than you want to.","The room does not need a show. It needs a man who is already occupied.","If you are funny, be funny on purpose. Not as armor."],"practice":"In the next conversation, leave one silence. Do not fill it.","motion":"path"},{"id":"health","title":"Health is the first duty","talk":"Why Indian men are not healthy?","youtubeId":"DpiUIL9X2wI","minutes":"21 min","lead":"A tired, unused body makes a soft mind. Fix the week before you fix the world.","points":["Desk work takes the day. You put the training back on purpose.","Sun, steps, sleep, water. Boring, and not optional.","Stop joking about being unfit. Change the schedule.","Food is fuel for the work, not a reward for surviving the day.","A strong man can still be tired. He does not live tired on purpose."],"practice":"Set a bedtime and a thirty-minute walk for tomorrow morning.","motion":"heart"},{"id":"father","title":"Stronger, without contempt","talk":"Why Indian fathers fear real masculinity","youtubeId":"_77saZIGX5c","minutes":"23 min","lead":"Some fathers only know control, because that is what they were given. You can be stronger without mocking them.","points":["His fear is not your ceiling.","Do not humiliate the man who raised you in order to feel free.","Strength without contempt is the actual upgrade.","Do not pass his fear on, to a son or to yourself.","Become capable first. Arguments before that are just noise."],"practice":"Write one honest sentence about what you will do differently. Send it only if it helps.","motion":"spine"},{"id":"late","title":"The prime is not only at 22","talk":"Peak masculinity starts after 40","youtubeId":"uBP0AVhi6wU","minutes":"24 min","lead":"Panic is a boy's clock. Muscle, money, and nerve can all be built late.","points":["Do not wait for a feeling. Start the decade's work this week.","The men who look finished at thirty usually stopped training.","A late start is still a start. An excuse is not.","Use the years you have. They are the only ones.","Consistency after forty beats a wild year at twenty."],"practice":"Name a skill you will still be doing at forty-five. Put the first hour on the calendar.","motion":"path"},{"id":"name","title":"A strong manner is trained","talk":"Weak personality to strong personality","youtubeId":"KscvzJ5OGIM","minutes":"28 min","lead":"Posture, eye contact, and a steady voice are drills. They are not gifts.","points":["Stand on both feet. Shoulders down. Don't fold into the chair.","Dress clean. Looking kept is respect, not a costume of wealth.","Keep small promises until your name means something.","Greet people while looking at them.","Personality is the trail of what you do when it is inconvenient."],"practice":"Today, look people in the eye when you greet them. Shoulders down.","motion":"eye"},{"id":"wealth","title":"A wage is not a fortune","talk":"Your work will never make you rich and wealthy","youtubeId":"TaIilzvH-t4","minutes":"35 min","lead":"A job keeps the lights on. Wealth is what you own, the skill you can sell, and what you do not waste.","points":["Do not quit a job you need just to feel bold.","Learn a skill people pay for, then own a piece of the result.","Looking put-together is not the same as pretending you are rich.","Spend less than you earn. Buy assets, not applause.","Leverage is skill plus ownership. It is not a slogan."],"practice":"Write what you earned, what you kept, and one skill you could sell.","motion":"coin"},{"id":"master","title":"Don't make everyone your master","talk":"Why do Indians make everyone their master?","youtubeId":"B3EgFodapc0","minutes":"16 min","lead":"Taking orders at work is not the same as handing someone your life.","points":["Parents, bosses, and teachers can advise. You decide.","A man who needs permission for every step is still a boy.","Freedom is competence plus the nerve to use it.","Do not trade your judgment for belonging.","Ask for help with a problem. Do not ask someone else to live it for you."],"practice":"Make one decision today without polling the group chat.","motion":"walk"}];
-    const key = "musculanity-done";
-    let done = [];
-    try { done = JSON.parse(localStorage.getItem(key) || "[]"); if (!Array.isArray(done)) done = []; } catch (e) { done = []; }
-    let active = 0;
-    const nav = document.getElementById("nav");
-    const stage = document.getElementById("stage");
-    function save() { localStorage.setItem(key, JSON.stringify(done)); }
-    function renderNav() {
-      nav.innerHTML = lessons.map((lesson, i) => `<button type="button" class="${i===active?"on":""}" data-i="${i}"><span class="n ${done.includes(lesson.id)?"done":""}">${done.includes(lesson.id)?"✓":i+1}</span><span><b>${lesson.title}</b><small>${lesson.minutes}</small></span></button>`).join("");
-    }
-    function render() {
-      const lesson = lessons[active];
-      document.getElementById("count").textContent = done.filter(id => lessons.some(l => l.id===id)).length + " of " + lessons.length + " practiced";
-      document.getElementById("meter").style.width = (done.filter(id => lessons.some(l => l.id===id)).length / lessons.length * 100) + "%";
-      renderNav();
-      stage.innerHTML = `
-        <div class="mark motion-${lesson.motion}" aria-hidden="true"><span class="ring"></span><span class="head"></span><span class="spine"></span><span class="arm l"></span><span class="arm r"></span><span class="leg l"></span><span class="leg r"></span></div>
-        <p class="kicker">Talk ${active+1} · ${lesson.minutes}</p>
-        <h2>${lesson.title}</h2>
-        <p class="lead">${lesson.lead}</p>
-        <ul>${lesson.points.map((p,i)=>`<li style="animation-delay:${i*70}ms"><i></i><span>${p}</span></li>`).join("")}</ul>
-        <p class="do"><span>Do this. </span>${lesson.practice}</p>
-        <div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/${lesson.youtubeId}" title="${lesson.talk.replace(/"/g,"")}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <p class="note">${lesson.talk}. Video by Logical Malik. This page is a study guide, not his official site.</p>
-        <div class="actions">
-          <button class="primary" id="mark" type="button">${done.includes(lesson.id)?"Practiced":"Mark practiced"}</button>
-          ${active<lessons.length-1?'<button id="next" type="button">Next point</button>':""}
-        </div>`;
-      document.getElementById("mark").onclick = () => {
-        done = done.includes(lesson.id) ? done.filter(id => id!==lesson.id) : done.concat(lesson.id);
-        save(); render();
-      };
-      const next = document.getElementById("next");
-      if (next) next.onclick = () => { active += 1; render(); };
-    }
-    nav.addEventListener("click", (event) => {
-      const button = event.target.closest("button");
-      if (!button) return;
-      active = Number(button.dataset.i);
-      render();
-    });
-    render();
-  </script>
+<header>
+  <div class="wrap">
+    <div><p class="kicker">Transformation</p><h1>Musculanity</h1></div>
+    <p class="count" id="count"></p>
+    <a class="channel" href="https://www.youtube.com/@LogicalMalik" target="_blank" rel="noreferrer">His channel</a>
+  </div>
+  <div class="bar"><i id="meter"></i></div>
+</header>
+<main>
+  <nav id="nav" aria-label="Phases"></nav>
+  <article id="stage"></article>
+</main>
+<script>
+const pack = {"lessons":[{"id":"rules","phase":"standard","title":"One standard, kept","talk":"Be a Real Masculine MAN (5 Important Rules)","youtubeId":"ElrpHHzBEWU","minutes":"33 min","description":"Malik's frame for what he calls a real man: a short set of rules you live, not a mood you announce. This is the first talk because every later phase hangs on a standard you can still keep when nobody is scoring you.","notes":["Listen for the rules he repeats, then write your own in plain language.","If a rule only works when you are angry, it is not a rule.","Do not collect ten principles. Five you will still do on a tired Thursday is the whole talk."],"points":["What you repeat is your character. What you announce is noise.","Strength, work, and self-command come before opinions.","Do not hand your spine to a parent, a boss, or a crowd.","Finish the hard useful thing the same day you name it."],"practice":"Write five rules. Put them where you dress. Check them at night for seven days.","motion":"spine"},{"id":"direct","phase":"standard","title":"Direct, not rude","talk":"Boy to Man transformation","youtubeId":"__n457Mc58s","minutes":"29 min","description":"The title says politeness makes you weak. The useful cut is narrower: people-pleasing is fear. A man can be courteous and still give a clear no. Rudeness is another performance.","notes":["When he says never be polite, translate it: stop hiding a no inside a smile.","Courtesy stays. The long apology after a clean refusal goes.","Notice where you agree in the moment and resent it an hour later. That is the drill."],"points":["People-pleasing is fear, not kindness.","Say the true thing once, in a calm voice.","A boy smiles through a no. A man gives the no and stops talking.","Insults are not strength. They are still a show."],"practice":"Decline one thing you do not want. One sentence. No follow-up paragraph.","motion":"voice"},{"id":"doubt","phase":"standard","title":"Doubt, then move","talk":"Why intelligent people doubt themselves","youtubeId":"DC4GwxOYcgc","minutes":"23 min","description":"Smart men stall because they can see every way a plan fails. This talk is about that freeze. Doubt is not a verdict. It is a feeling you take with you while you do the next concrete step.","notes":["Write the doubt in one line, then the smallest action that does not require certainty.","Do not wait to feel sure. Sure comes after a few reps, not before.","If the doubt is about hurting someone, listen to it. If it is about looking foolish, move."],"points":["Seeing the risks is not the same as being stuck.","A man moves with an incomplete map.","Confidence is a record of finished work, not a mood you download."],"practice":"Name the thing you have been circling. Do twenty minutes of it today.","motion":"path"},{"id":"upgrade","phase":"standard","title":"Most men never change the week","talk":"99% will never upgrade in life","youtubeId":"bpcnTBCJaW0","minutes":"20 min","description":"A warning against watching talks and keeping the same week. The upgrade is a changed schedule: sleep, training, money, and one skill. If those four look the same in thirty days, you did not start.","notes":["Do not argue with the percentage. Check your own calendar.","An upgrade is boring. New opinions are not an upgrade.","Pick one number you can measure next Sunday."],"points":["Information without a changed week is entertainment.","The men who stay the same are not unlucky. They are unscheduled.","Measure one thing or you are guessing."],"practice":"Block four training days and one skill hour on next week's calendar before the next talk.","motion":"path"},{"id":"iron","phase":"body","title":"Build a strong body","talk":"How to be a STRONG MAN?","youtubeId":"j4CIALiNJTU","minutes":"27 min","description":"His case that Indian men look weak because the day never includes hard physical work. Strength here is push-ups, squats, walks, and sleep, not a speech about alpha. The body is phase two because a tired body makes every later decision softer.","notes":["Ignore the national insult. Keep the schedule.","If you have no gym, the floor is enough for this month.","Write the sets. A number you did not record did not happen."],"points":["Train four days. Walk the others. Sleep like it is part of the work.","No gym is not an excuse.","Strength makes you harder to push, in a room and in a crisis.","A man measures. A boy hopes."],"practice":"Three sets of push-ups and squats now. Log the counts.","motion":"iron"},{"id":"health","phase":"body","title":"Health is the first duty","talk":"Why Indian men are not healthy?","youtubeId":"DpiUIL9X2wI","minutes":"21 min","description":"A follow-on to the strength talk: desk hours, junk food, and joking about being unfit. Health is not a reward after you become successful. It is the base the rest of the build sits on.","notes":["List what you ate yesterday without defending it.","Sun, steps, sleep, water. Add them before you add supplements.","Stop using work as the reason the body gets nothing."],"points":["A tired, unused body makes a soft mind.","Food is fuel for the work, not a prize for surviving the day.","You can be tired. You do not get to live tired on purpose."],"practice":"Set tomorrow's bedtime and a thirty-minute morning walk.","motion":"heart"},{"id":"muscle","phase":"body","title":"Eat to grow","talk":"How to grow muscles? 150g protein a day","youtubeId":"f-GwO092qI0","minutes":"23 min","description":"The practical food talk: muscle needs protein across the day, not motivation. One hundred and fifty grams is his target for a man trying to grow. Adjust it to your size, but stop eating like a boy who hopes the workout is enough.","notes":["Name three foods you will actually buy this week that carry protein.","Training without food is just getting tired.","If 150g is too far from where you are, add one solid protein meal first. Then raise it."],"points":["The workout is half. The plate is the other half.","Rice alone will not build you.","Buy the food before you argue about the perfect number."],"practice":"Write today's protein meals. Hit them. No new diet theory.","motion":"iron"},{"id":"hard","phase":"body","title":"Stop avoiding hard things","talk":"Why Indian men are soft","youtubeId":"Ux6QVKDLSXs","minutes":"23 min","description":"The title compares men to girls. That comparison is an insult, and it is not the lesson. The useful part is the avoidance: comfort, screens, and a week with no hard physical or mental work. Hardness is a schedule, not a slur.","notes":["Skip the line that needs to mock women. It does not make you stronger.","Ask which hard thing you dropped this month: training, a skill, a difficult conversation.","Softness to fix is avoidance. Kindness is not the problem."],"points":["Avoiding hard work is the weakness. Women are not the insult to aim at.","Put one difficult block on the day before the easy one.","Discomfort you choose is training. Discomfort you dump on others is not."],"practice":"Do the hardest useful task on your list before you open a feed.","motion":"spine"},{"id":"late","phase":"body","title":"The prime is not only at 22","talk":"Peak masculinity starts after 40","youtubeId":"uBP0AVhi6wU","minutes":"24 min","description":"A correction for men who think they missed the window. Muscle, money, and nerve can be built late. The talk is permission to start, not permission to wait.","notes":["If you are young, do not use this as a reason to delay.","If you are older, stop narrating the years you lost. Start the set.","The standard is the same at 25 and at 45: this week's work."],"points":["Panic is a boy's clock.","The men who look finished at thirty usually stopped training.","A late start is still a start."],"practice":"Name a skill you will still be doing at forty-five. Put the first hour on the calendar.","motion":"path"},{"id":"name","phase":"manner","title":"A strong manner is trained","talk":"Weak personality to strong personality","youtubeId":"KscvzJ5OGIM","minutes":"28 min","description":"Personality as a set of drills: posture, eye contact, a steady voice, clothes that are clean, and promises you keep. He is not selling a new identity. He is saying the way you enter a room is practice.","notes":["Film ten seconds of how you sit. Shoulders, feet, hands.","Greet the next three people while looking at them.","A strong manner is quiet. It is not a louder opinion."],"points":["Stand on both feet. Shoulders down. Don't fold into the chair.","Dress clean. Looking kept is respect, not a costume of wealth.","Keep small promises until your name means something.","Personality is what you do when it is inconvenient."],"practice":"Shoulders down and eyes up for every greeting today.","motion":"eye"},{"id":"still","phase":"manner","title":"Don't play the joker","talk":"Be a strong man, and don't act like a joker","youtubeId":"T9H1xGq-_a8","minutes":"27 min","description":"About the man who turns every moment into a joke so nobody can reject the real one. Humor is fine. Clowning as armor is the habit this talk wants you to drop.","notes":["Count how many times you joke to escape a serious sentence.","Leave one silence in the next conversation. Do not fill it.","If you are funny, be funny on purpose, after the point is made."],"points":["Your joke is not your personality.","Speak slower than you want to.","The room needs a man who is already occupied, not a show."],"practice":"Say one serious sentence today with no joke after it.","motion":"voice"},{"id":"look","phase":"manner","title":"Look kept, not fake-rich","talk":"This video will make you look rich and wealthy","youtubeId":"J3c1rhb3_ak","minutes":"28 min","description":"A grooming and kit talk: face, teeth, shoes, a bag, a bottle, clothes that fit, and money spent on your health instead of junk. The point is to look like a man who maintains himself. It is not a license to pretend you have money you do not.","notes":["Fix what people actually see: shoes, teeth, hair, shirt that fits.","Spend on the body before you spend on a logo.","If a purchase is there to lie, don't buy it."],"points":["Maintenance is masculine. Display is not.","Clean and fitted beats expensive and sloppy.","Invest in health and tools you use, not in a costume."],"practice":"Repair or replace the one item that makes you look unfinished. Shoes, shirt, or a haircut.","motion":"eye"},{"id":"adult","phase":"stand","title":"Stop living as a guest","talk":"Why Indian boys never behave like a real man","youtubeId":"6Md2Us92vQA","minutes":"24 min","description":"His argument that a lot of men stay boys because the house, the money, and the decisions still belong to someone else. Adulthood here means a skill, a wage, and choices you pay for. It does not mean vanishing on people who depend on you.","notes":["List what you still outsource: rent, decisions, conflict.","Respect your parents. Do not let their fear pick your city or your work.","If someone depends on you, get stronger and lead. Do not disappear."],"points":["Pay your own way as soon as you can.","Blame is a boy's hobby. A plan is a man's.","A room you pay for changes how you stand."],"practice":"Name one bill, skill, or decision you will take over this month.","motion":"walk"},{"id":"father","phase":"stand","title":"Stronger, without contempt","talk":"Why Indian fathers fear real masculinity","youtubeId":"_77saZIGX5c","minutes":"23 min","description":"About fathers who only know control, and sons who either copy that or spend their life rebelling against it. The build is to become more capable than the fear you inherited, without humiliating the man who raised you.","notes":["His limits are not your ceiling, and they are not a joke.","Do not win an argument you cannot back with a life you built.","Write what you will do differently before you say it out loud."],"points":["Strength without contempt is the upgrade.","Become capable first. Speeches before that are noise.","Do not pass his fear on."],"practice":"One honest sentence about what you will do differently. Send it only if it helps.","motion":"spine"},{"id":"son","phase":"stand","title":"A poor house is not your sentence","talk":"Why a poor father's son does not become a real man","youtubeId":"vWWDL73iw18","minutes":"33 min","description":"The pattern he keeps returning to: a tight house teaches obedience and fear, then calls that manhood. You can keep loyalty and still refuse the small life. The work is skill and nerve, not shame about where you started.","notes":["Do not hate the house. Study which habit in it you are still running.","Money stress is real. Use it as a reason to learn a paid skill, not as an identity.","Speak about your father as a man with limits, not as a villain in your story."],"points":["Where you started explains the fear. It does not excuse staying there.","Loyalty is not the same as obedience forever.","Build a skill the house never had."],"practice":"Name the family habit you will not repeat, and the skill that replaces it.","motion":"walk"},{"id":"left","phase":"stand","title":"Leave to build, not to vanish","talk":"How I left my home","youtubeId":"RQLejT2Ab0w","minutes":"32 min","description":"His own story of walking out and living on the road. Use it as a case of a man who chose his days, not as an order to abandon a family that needs you. The principle is steering your life. The method is yours.","notes":["Separate the story from the instruction. His exit is not your assignment.","If you stay, stay as an adult who pays and decides, not as a guest.","If you go, leave a plan for anyone who depends on your income."],"points":["Your life has to be yours to steer.","Leaving is a tool for some men. It is not proof that you are one.","Freedom without a skill is just being between rooms."],"practice":"Write the next ninety days: where you sleep, what you earn, what you train. Stay or go from that page.","motion":"walk"},{"id":"society","phase":"stand","title":"The crowd does not get a vote","talk":"Your society drove me out","youtubeId":"t4fsh4X0tg0","minutes":"29 min","description":"A talk about leaving because the people around him would not let him live on his own terms. The note to keep: other people's embarrassment is not a plan. You still owe the truth, and you still owe anyone who depends on you.","notes":["Name the expectation that is actually theirs, not yours.","Do not use 'society' as a fog. Name the person and the demand.","You can refuse a life and still be decent about it."],"points":["Belonging is not worth a life you hate.","Refuse the demand. Don't insult the people making it.","A clean no needs a life that can stand after the no."],"practice":"Write the one expectation you will stop obeying, and what you will do instead this month.","motion":"voice"},{"id":"master","phase":"stand","title":"Don't make everyone your master","talk":"Why do Indians make everyone their master?","youtubeId":"B3EgFodapc0","minutes":"16 min","description":"About handing your judgment to parents, bosses, gurus, and the group chat. Taking orders at a job is not the same as handing someone your life. This is the close of the standing phase: you decide.","notes":["List who you ask before you are allowed to move.","Ask for information. Stop asking for permission on your own life.","A decision you can reverse is still yours to make."],"points":["Advisers advise. You decide.","A man who needs permission for every step is still a boy.","Freedom is competence plus the nerve to use it."],"practice":"Make one decision today without polling anyone.","motion":"spine"},{"id":"wealth","phase":"means","title":"A wage is not a fortune","talk":"Your work will never make you rich","youtubeId":"TaIilzvH-t4","minutes":"35 min","description":"His claim that a salary keeps you fed and never makes you wealthy. Take the distinction: wages pay the week, ownership and a skill people buy create the surplus. Do not hear it as an order to quit a job you need.","notes":["Write what you earned last month and what you kept.","Stay employed while you build the thing you can own.","A skill you can sell beside the job is the first asset."],"points":["Do not quit a job you need just to feel bold.","Learn a skill people pay for, then own a piece of the result.","Spend less than you earn. Buy tools and skill, not applause."],"practice":"Three lines: earned, kept, and one skill you could sell.","motion":"coin"},{"id":"stages","phase":"means","title":"Five stages, not a leap","talk":"My real story of poor to rich, in 5 stages","youtubeId":"r4DF0wUWkBU","minutes":"25 min","description":"Malik's own sequence from having nothing to having options. Use it as a staged path: survive, skill, reputation, leverage, then surplus. Skipping to the last stage is how men stay broke and loud.","notes":["Mark which stage you are actually in, not the one you post about.","Stage one is paid work and lower spending. Do not skip it.","Each stage has a proof. If you cannot point at it, you are not there."],"points":["Transformation is a sequence. It is not a mood.","Survive cleanly before you talk about freedom.","Reputation is work people will pay for again."],"practice":"Write your stage in one sentence and the proof you will have in thirty days.","motion":"path"},{"id":"tricks","phase":"means","title":"Four moves, then repeat them","talk":"How poor people can become rich, four tricks","youtubeId":"Kh6vweKzLRw","minutes":"25 min","description":"A short tactics talk aimed at men who start with no capital. Treat 'tricks' as habits: learn a paid skill, cut waste, put the surplus back into the skill, and stay at it longer than your mood. There is no secret that replaces those.","notes":["If a trick needs you to lie or to take what is not yours, drop it.","Write the four actions in your own words after the video, from memory.","Do the cheapest one tomorrow morning."],"points":["No capital is not the same as no move.","The first surplus goes back into skill, not into showing it.","Repetition is the trick. Novelty is the trap."],"practice":"Pick one of the four and do it tomorrow before noon.","motion":"coin"},{"id":"leverage","phase":"means","title":"Leverage beats longer hours","talk":"The concept of leverage","youtubeId":"4UHaWZcBtkg","minutes":"20 min","description":"Why grinding more hours at the same task has a ceiling. Leverage is a skill, a tool, or a product that works when you are not in the room. You earn it after you are already good at the base work, not instead of it.","notes":["Name the hour you repeat that a template, a tool, or a helper could carry.","Do not call a daydream leverage. It has to produce without you once.","Get good first. Then remove yourself from the repeatable part."],"points":["More hours on the same task is not a fortune.","Leverage is skill plus something that scales.","You cannot leverage work you have not learned."],"practice":"Write one repeated task and the tool or document that will do it next time.","motion":"coin"},{"id":"size","phase":"means","title":"Think at the size of the life","talk":"Don't think small. Become rich now","youtubeId":"nukUqgfNpFc","minutes":"32 min","description":"A mindset talk: the life you picture is the life you prepare for. Useful only if the bigger picture changes this week's actions. A bigger fantasy with the same week is still small.","notes":["After the video, write one larger aim and the ugly first step.","If the aim needs a lie, shrink it until it is true.","Small thinking is a budget, a skill, and a city you refused to question."],"points":["Aim up. Then do the small ugly step that aim requires.","Reflection without a calendar is decoration.","The size of your life is the size of your week."],"practice":"One larger aim. One action this week that would embarrass the old plan.","motion":"path"},{"id":"nojob","phase":"means","title":"Income without a boss, after the skill","talk":"How to be rich without any job","youtubeId":"DmLrXwEsQx4","minutes":"26 min","description":"His picture of income that is not a salary. Hear the order: a saleable skill and money saved come before you drop the job. Quitting to feel free, with no offer anyone pays for, is not this talk.","notes":["Do not resign off the back of a video.","List who would pay you next month if the job ended.","If that list is empty, the job stays and the evenings build the list."],"points":["No boss is a result of something people buy.","Keep the job until the other income is real.","Bold and broke is still broke."],"practice":"Write one offer a stranger could pay for. Show it to one person this week.","motion":"coin"},{"id":"dating","phase":"bond","title":"Dating with a spine","talk":"Behave like a strong man, dating tips","youtubeId":"lTBB5c38Kx0","minutes":"23 min","description":"Dating as self-respect: don't chase silence, don't perform a character, don't need her approval to feel like a man. Control of another person is not in this phase. The standard is two adults who can walk away.","notes":["Two unanswered tries is a no. Stop.","Say what you want in one clear sentence.","If the advice in the video turns into domination, leave that part. Keep the spine."],"points":["Do not chase someone who will not answer.","Respect runs both ways.","A full life is attractive. Needing her to feel like a man is not."],"practice":"If you are waiting on a message, close the app and train.","motion":"eye"},{"id":"realmen","phase":"bond","title":"Be interesting before you pursue","talk":"Dating tips for real men","youtubeId":"w49poTaVMqQ","minutes":"30 min","description":"A second dating talk, aimed at men who lead with need. The build so far is the point: a body, a manner, work, and a life you are already in. Pursuit comes after that, and it stays honest.","notes":["Do not use lines. Use a life you can talk about without inventing it.","Neediness is a schedule problem. Fill the day before you fill the chat.","She is not a prize for finishing the other phases. She is a person."],"points":["Get a life before you ask to be let into hers.","Honesty is more attractive than a script.","Rejection is information. It is not a verdict on your manhood."],"practice":"Plan one day this week that is yours, with no one to impress.","motion":"eye"},{"id":"marriage","phase":"bond","title":"Decide about marriage with a clear head","talk":"Marriage, good or bad?","youtubeId":"gIRL1ptmMUQ","minutes":"25 min","description":"He argues both sides of marriage instead of handing you a tribe's answer. Use the talk to decide on purpose: money, children, freedom, and the kind of partnership you can actually live. Pressure from relatives is not a reason, and contempt for marriage is not a personality.","notes":["Write what you want a shared life to do, and what you refuse to give up.","If you are not ready to provide and to stay, do not pretend you are.","A no to marriage is allowed. A speech against women is not the same thing."],"points":["Decide. Don't drift into it or against it.","A partnership is a responsibility, not a rescue.","Your family's timetable is not your vow."],"practice":"One page: what you would need in place before you marry, or why you are choosing not to.","motion":"voice"},{"id":"avoid","phase":"bond","title":"Don't marry from fear","talk":"Indians are avoiding marriage","youtubeId":"XfPWX2M4PQA","minutes":"31 min","description":"On why more people are refusing the old wedding script. The useful distinction: avoiding a bad deal is adult. Avoiding every bond because you are afraid of work is not. Finish the earlier phases before you call solitude a philosophy.","notes":["Separate fear of responsibility from a real no.","If you want a partner later, the body, the money, and the manner are the preparation.","Solitude is a season you use. It is not a hiding place."],"points":["You may refuse a marriage that would shrink you.","You may not refuse your own growth and call it freedom.","A clear no is better than a resentful yes."],"practice":"Write whether your current no is fear or a decision. One paragraph. Be exact.","motion":"path"}],"phases":[{"id":"standard","name":"01  Standard","aim":"Decide what you will keep before you touch the weights or the money."},{"id":"body","name":"02  Body","aim":"A transformation that skips the body is a speech. Train first."},{"id":"manner","name":"03  Manner","aim":"How you sit, speak, and stay quiet is trained the same way as a lift."},{"id":"stand","name":"04  Stand","aim":"Take your own life in hand without contempt for the people who raised you."},{"id":"means","name":"05  Means","aim":"A wage pays the week. Skill, ownership, and what you keep build the man."},{"id":"bond","name":"06  Bond","aim":"Self-respect with other people. Not control of them."}]};
+const lessons = pack.lessons, phases = pack.phases;
+const key = "musculanity-done";
+let done = [];
+try { done = JSON.parse(localStorage.getItem(key) || "[]"); if (!Array.isArray(done)) done = []; } catch (e) { done = []; }
+let active = 0;
+const nav = document.getElementById("nav");
+const stage = document.getElementById("stage");
+const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&":"&","<":"<",">":">" }[c]));
+function save(){ localStorage.setItem(key, JSON.stringify(done)); }
+function finished(){ return done.filter((id) => lessons.some((l) => l.id === id)).length; }
+function render(){
+  const lesson = lessons[active];
+  const phase = phases.find((p) => p.id === lesson.phase);
+  const pi = phases.findIndex((p) => p.id === lesson.phase);
+  document.getElementById("count").textContent = "Phase " + (pi+1) + " of " + phases.length + " / " + finished() + " of " + lessons.length + " done";
+  document.getElementById("meter").style.width = (finished()/lessons.length*100) + "%";
+  nav.innerHTML = phases.map((p) => {
+    const group = lessons.map((l,i) => ({l,i})).filter((e) => e.l.phase === p.id);
+    const n = group.filter((e) => done.includes(e.l.id)).length;
+    return '<div class="phase"><p class="kicker">' + esc(p.name) + ' <span style="color:var(--ember)">' + n + '/' + group.length + '</span></p>' +
+      group.map(({l,i}) => '<button type="button" class="' + (i===active?"on":"") + '" data-i="' + i + '"><span class="n ' + (done.includes(l.id)?"done":"") + '">' + (done.includes(l.id)?"✓":i+1) + '</span><span><b>' + esc(l.title) + '</b><small>' + esc(l.minutes) + '</small></span></button>').join("") +
+      '</div>';
+  }).join("");
+  stage.innerHTML =
+    '<p class="kicker">' + esc(phase.name) + ' · Talk ' + (active+1) + ' · ' + esc(lesson.minutes) + '</p>' +
+    '<h2>' + esc(lesson.title) + '</h2><p class="aim">' + esc(phase.aim) + '</p>' +
+    '<div class="sheet"><div class="mark motion-' + lesson.motion + '" aria-hidden="true"><span class="ring"></span><span class="head"></span><span class="spine"></span><span class="arm l"></span><span class="arm r"></span><span class="leg l"></span><span class="leg r"></span></div><div><p class="kicker">The talk</p><p class="talk">' + esc(lesson.description) + '</p></div></div>' +
+    '<h3 class="kicker" style="margin-top:1.4rem">Watch notes</h3><ol>' + lesson.notes.map((n,i) => '<li><span class="num">0' + (i+1) + '</span><span>' + esc(n) + '</span></li>').join("") + '</ol>' +
+    '<h3 class="kicker" style="margin-top:1.2rem">Keep these</h3><ul>' + lesson.points.map((p) => '<li>' + esc(p) + '</li>').join("") + '</ul>' +
+    '<p class="do"><span style="color:var(--ember)">Build this. </span>' + esc(lesson.practice) + '</p>' +
+    '<div class="frame"><iframe src="https://www.youtube-nocookie.com/embed/' + lesson.youtubeId + '" title="' + esc(lesson.talk) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>' +
+    '<p class="note">' + esc(lesson.talk) + '. Video by Logical Malik. Study guide, not his official site. Do the phases in order.</p>' +
+    '<div class="actions"><button class="primary" id="mark" type="button">' + (done.includes(lesson.id)?"Logged":"Log this phase step") + '</button>' +
+    (active<lessons.length-1?'<button id="next" type="button">Next in the build</button>':"") + '</div>';
+  document.getElementById("mark").onclick = () => { done = done.includes(lesson.id) ? done.filter((id)=>id!==lesson.id) : done.concat(lesson.id); save(); render(); };
+  const next = document.getElementById("next");
+  if (next) next.onclick = () => { active += 1; render(); stage.scrollIntoView({behavior:"smooth", block:"start"}); };
+}
+nav.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+  if (!button) return;
+  active = Number(button.dataset.i);
+  render();
+});
+render();
+</script>
 </body>
 </html>
